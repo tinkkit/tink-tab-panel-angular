@@ -1,5 +1,5 @@
 <!doctype html>
-<html ng-app="tink.skeleton">
+<html ng-app="tink.tabpanel">
 <head>
   <meta charset="utf-8">
   <title>Tink module</title>
@@ -7,15 +7,48 @@
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="viewport" content="initial-scale=1.0,user-scalable=no,minimum-scale=1.0">
   <!-- bower:css -->
+  <link rel="stylesheet" href="bower_components/tink-core/dist/tink.css" />
   <!-- endbower -->
 </head>
-<body>
-
-<tink-skeleton data-text="Skeleton is working fine!"></tink-skeleton>
+<body ng-controller="ctrl as c">
 
 <!-- bower:js -->
+<script src="bower_components/jquery/dist/jquery.js"></script>
+<script src="bower_components/angular/angular.js"></script>
+<script src="bower_components/angular-resource/angular-resource.js"></script>
+<script src="bower_components/angular-cookies/angular-cookies.js"></script>
+<script src="bower_components/angular-sanitize/angular-sanitize.js"></script>
+<script src="bower_components/angular-animate/angular-animate.js"></script>
+<script src="bower_components/angular-touch/angular-touch.js"></script>
+<script src="bower_components/angular-route/angular-route.js"></script>
 <!-- endbower -->
+	<ul tink-tab-panel="content" class="nav-tabs nav-lg">
+	  <li tink-tab="{{::data}}" tink-tab-template="views/{{::data}}.html" ng-repeat="data in c.data" role="presentation"><a>{{::data}}</a></li>
+	</ul>
+	<div tink-tab-panel-content="content">
+		
+	</div>
+	<script>
+		(function(module) {
+		  try {
+		    module = angular.module('tink.tabpanel');
+		  } catch (e) {
+		    module = angular.module('tink.tabpanel', []);
+		  }
+		  module.controller('ctrl',function(tinkTab,$timeout){
+		  	this.titel = "vincent flikt het weer";
+		  	this.data = ["large","tabs","are","cool"];
 
-<script src="scripts/directives/skeleton.js"></script>
+		  	tinkTab.setTabActive('content','tabs');
+		  	$timeout(function(){
+				tinkTab.setTabActive('content','cool');
+		  	},4000)
+		  })
+		})();
+	</script>
+	<script src="scripts/directives/tabPanel.js"></script>
+	<script src="scripts/directives/tab.js"></script>
+	<script src="scripts/directives/tabPanelContent.js"></script>
+	<script src="scripts/services/tabService.js"></script>
 </body>
 </html>
