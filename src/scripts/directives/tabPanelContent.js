@@ -10,15 +10,12 @@
       restrict: 'EA',
       replace: false,
       compile:function compile(tElement, tAttrs, transclude) {
-        //$(tElement).attr('ng-bind-html','contentTab');
          return {
           pre: function preLink(scope, iElement, iAttrs, controller) { },
           post: function postLink(scope, iElement, iAttrs, controller) {
             scope.changeContent = function(content){
-
               iElement.html(content); 
               $compile(iElement)(scope);
-              console.log(scope)
             }
           }
         }
