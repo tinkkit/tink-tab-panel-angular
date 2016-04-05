@@ -10,6 +10,7 @@
       restrict: 'EA',
       replace: true,
       require:'^tinkTabPanel',
+      scope:{},
       link: function(scope,element,attr,req) {
         scope.active = function(){
           element.addClass('active');
